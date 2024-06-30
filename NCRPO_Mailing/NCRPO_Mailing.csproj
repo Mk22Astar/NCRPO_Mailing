@@ -150,10 +150,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddItem.xaml.cs">
+      <DependentUpon>AddItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BDModel\ncrpoContext.cs" />
     <Compile Include="BDModel\Regions.cs" />
     <Compile Include="BDModel\Signatures.cs" />
     <Compile Include="BDModel\Types.cs" />
+    <Page Include="AddItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -171,6 +178,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\NewSignature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NewEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AboutApp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +213,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BDModel\Organizations.cs" />
+    <Compile Include="Pages\NewSignature.xaml.cs">
+      <DependentUpon>NewSignature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewEmail.xaml.cs">
+      <DependentUpon>NewEmail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AboutApp.xaml.cs">
       <DependentUpon>AboutApp.xaml</DependentUpon>
     </Compile>

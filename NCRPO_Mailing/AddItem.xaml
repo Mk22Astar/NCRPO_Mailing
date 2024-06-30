@@ -1,0 +1,13 @@
+﻿<Window x:Class="NCRPO_Mailing.AddItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NCRPO_Mailing"
+        mc:Ignorable="d"
+        Title="Добавление" Height="215" Width="384" Background="Gray">
+    <Grid>
+        <Frame x:Name="FrmAddItem"  NavigationUIVisibility="Hidden"/>
+
+    </Grid>
+</Window>

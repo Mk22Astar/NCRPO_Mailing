@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace NCRPO_Mailing
 {
@@ -25,6 +26,8 @@ namespace NCRPO_Mailing
         {
             InitializeComponent();
             FrmMain.Navigate(new Pages.Auto());
+            
+
 
         }
         private void FrmMain_ContentRendered(object sender, EventArgs e)

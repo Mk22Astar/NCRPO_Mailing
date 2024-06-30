@@ -1,0 +1,38 @@
+﻿<Page x:Class="NCRPO_Mailing.NewSignature"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NCRPO_Mailing"
+      mc:Ignorable="d" 
+      d:DesignHeight="215" d:DesignWidth="384"
+      Title="Добавление новой подписи" Background="Gray">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="229*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" TextWrapping="Wrap" Width="225" FontSize="14" Grid.Row="1" Margin="4,11,0,2" Grid.Column="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" TextWrapping="Wrap" Text="Название подписи:" VerticalAlignment="Top" FontSize="12" Foreground="White" Height="19" Width="106" Grid.Row="1"/>
+        <RichTextBox x:Name="rtbSignature" FontSize="15" SpellCheck.IsEnabled="True" Language="ru-ru" Margin="12,2,0,10" Grid.Row="3" Grid.ColumnSpan="3">
+            <FlowDocument>
+                <Paragraph/>
+            </FlowDocument>
+        </RichTextBox>
+        <Button x:Name="btnSave" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" FontSize="14" Grid.Row="4" Height="26" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Отмена" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Center" FontSize="14" Width="92" Grid.Row="4" Grid.Column="2" Height="26" Click="btnCancel_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="14,0,0,0" TextWrapping="Wrap" Text="Подпись:" VerticalAlignment="Center" FontSize="12" Foreground="White" Height="19" Width="106" Grid.Row="2"/>
+
+    </Grid>
+</Page>

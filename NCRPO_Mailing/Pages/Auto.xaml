@@ -19,10 +19,10 @@
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1100" Width="524" Background="#F339">
             <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Авторизация" FontSize="30" Height="48" Width="206" Foreground="White"/>
             <TextBlock Text="Логин:" FontSize="15" Foreground="White" Width="204"/>
-            <ComboBox x:Name="cbLogin" FontSize="15" Width="208" Height="23"/>
+            <ComboBox x:Name="cbLogin" FontSize="15" Width="208" Height="23"  DisplayMemberPath="Name"/>
             <TextBlock Text="Пароль:"  FontSize="15" Foreground="White" Width="203"/>
-            <TextBox x:Name="cbPassword" FontSize="15" Width="208" Height="23" />
-            <TextBox x:Name="tbPassword" Visibility="Hidden"  FontSize="15" Width="208" Height="47"/>
+            <TextBox x:Name="tbPassword" FontSize="15" Width="208" Height="23" />
+            <TextBox  Visibility="Hidden"  FontSize="15" Width="208" Height="47"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" Height="47" Width="208" >
                 <Button x:Name="btnAuthorization" Content="Войти"  Width="207" Height="40" FontSize="20" Click="btnAuthorization_Click"/>
 

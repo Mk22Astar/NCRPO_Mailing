@@ -23,16 +23,48 @@ namespace NCRPO_Mailing.Pages
         public Auto()
         {
             InitializeComponent();
-            
+            using (var context = new ncrpoContext())
+            {
+                var departments = context.Departments.ToList();
+                cbLogin.ItemsSource = departments;
+            }
+
         }
 
         private void btnAuthorization_Click(object sender, RoutedEventArgs e)
         {
             string departmentName = cbLogin.Text;
             string password = tbPassword.Text;
+            if (Authenticate(departmentName, password))
+            {
+                using (var context = new ncrpoContext())
+                {
+                    var departmentId = context.Departments.Where(d => d.Name == departmentName).Select(d => d.DepartmentId).FirstOrDefault();
+                    if (departmentId != 0)
+                    {
+                        NavigationService.Navigate(new SendingMessages(departmentId));
+                    }
+                    else
+                    {
+                        MessageBox.Show("ID отдела не найден. Пожалуйста, проверьте выбранное название отдела.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите название своего отдела из списка или введите вручную.\nПароль не сложный: passw0rd+цифра\n\nP.S. Если вашего отдела здесь нет, жалуйтесь руководителю, я бессилен.");
+            }
 
-            NavigationService.Navigate(new SendingMessages());
+            
         }
-        
+        public bool Authenticate(string departmentName, string password)
+        {
+            using (var context = new ncrpoContext())
+            {
+                var department = context.Departments.FirstOrDefault(d => d.Name == departmentName && d.Password == password);
+                return department != null;
+            }
+        }
+
     }
 }

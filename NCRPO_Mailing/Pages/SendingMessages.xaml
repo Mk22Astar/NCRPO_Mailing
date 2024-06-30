@@ -8,47 +8,54 @@
       Title="Почта" Background="Gray" Height="1000" Width="1000">
 
     <Grid Height="1000"  Width="1000" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="391*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="87*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="158*"/>
             <ColumnDefinition Width="577*"/>
             <ColumnDefinition Width="27*"/>
             <ColumnDefinition Width="238*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Background="#F339" Foreground="White" Grid.Column="0">
+        <GroupBox Background="#F339" Foreground="White" Grid.Column="0" Grid.RowSpan="3">
             <Grid Height="1000" Margin="0,0,-2,0">
-                <Button Content="Организации" Margin="0,275,0,655" RenderTransformOrigin="0.493,0.105" Click="Button_Click_2"/>
-                <Button Content="Личные данные" Margin="0,372,0,558" Click="Button_Click_1"/>
-                <Button x:Name="btnAboutApplication" Content="О приложении" Margin="0,476,0,458" Click="btnAboutApplication_Click"/>
-                <Button x:Name="btnExit" Content="Выход" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnExit_Click" Height="66" Width="148" Margin="0,772,0,0"/>
+                <Button x:Name="btnOrganizations" Content="Организации" Margin="0,275,0,655" RenderTransformOrigin="0.493,0.105" Click="btnOrganizations_Click" FontSize="14"/>
+                <Button x:Name="btnDepartmens" Content="Отделы" Margin="0,372,0,558" Click="btnDepartmens_Click" FontSize="14"/>
+                <Button x:Name="btnAboutApplication" Content="О приложении" Margin="0,476,0,458" Click="btnAboutApplication_Click" FontSize="14"/>
+                <Button x:Name="btnExit" Content="Выход" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnExit_Click" Height="41" Width="148" Margin="0,782,0,0" FontSize="20"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Поиск почт получателя" Background="#F339" Foreground="White" Grid.Column="3" Margin="2,-7,0,7">
+        <GroupBox Header="Поиск почт получателя" Background="#F339" Foreground="White" Grid.Column="3" Margin="2,-7,0,7" Grid.RowSpan="3">
             <Grid Height="1000">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="ИНН:" Foreground="White" />
-                <ComboBox x:Name="cbINN" IsEditable="True" HorizontalAlignment="Left" Margin="7,31,0,0" VerticalAlignment="Top" Width="193" DisplayMemberPath="Inn"/>
+                <ComboBox x:Name="cbINN"  IsEditable="True" FontSize="15" HorizontalAlignment="Left" Margin="7,31,0,0" VerticalAlignment="Top" Width="193" DisplayMemberPath="Inn"/>
                 <TextBlock HorizontalAlignment="Left" Margin="6,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Почта:" Foreground="White"/>
-                <ComboBox x:Name="cbEmail" IsEditable="True" HorizontalAlignment="Left" Margin="7,69,0,0" VerticalAlignment="Top" Width="193" Height="24" RenderTransformOrigin="0.5,0.5" DisplayMemberPath="Email"/>
+                <ComboBox x:Name="cbEmail" FontSize="15" IsEditable="True" HorizontalAlignment="Left" Margin="7,69,0,0" VerticalAlignment="Top" Width="193" Height="24" RenderTransformOrigin="0.5,0.5" DisplayMemberPath="Email"/>
                 <TextBlock HorizontalAlignment="Left" Margin="7,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Регион:" Foreground="White"/>
-                <ComboBox x:Name="cbRegion" IsEditable="True" HorizontalAlignment="Left" Margin="6,111,0,0" VerticalAlignment="Top" Width="194"/>
+                <ComboBox x:Name="cbRegion" IsEditable="True" FontSize="15" HorizontalAlignment="Left" Margin="6,111,0,0" VerticalAlignment="Top" Width="194"/>
                 <TextBlock HorizontalAlignment="Left" Margin="6,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Полное название организации:" Foreground="White"/>
-                <ComboBox x:Name="cbName" IsEditable="True" HorizontalAlignment="Left" Margin="6,155,0,0" VerticalAlignment="Top" Width="194" DisplayMemberPath="Name"/>
+                <ComboBox x:Name="cbName" IsEditable="True" FontSize="15" HorizontalAlignment="Left" Margin="6,155,0,0" VerticalAlignment="Top" Width="194" DisplayMemberPath="Name"/>
                 <TextBlock HorizontalAlignment="Left" Margin="6,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Краткое название организации:" Foreground="White"/>
-                <ComboBox x:Name="cbShortName" IsEditable="True" HorizontalAlignment="Left" Margin="6,203,0,0" VerticalAlignment="Top" Width="194" DisplayMemberPath="ShortName"/>
-                <Button x:Name="btnSearchEmail" Content="Поиск" HorizontalAlignment="Left" Margin="7,237,0,0" VerticalAlignment="Top" Height="28" Width="95" Click="btnSearchEmail_Click"/>
-                <Button x:Name="btnAddRecipientEmail" Content="Добавить почту получателя" HorizontalAlignment="Left" Margin="13,703,0,0" VerticalAlignment="Top" Width="187" Click="btnAddRecipientEmail_Click" Height="37" FontSize="14"/>
-                <TextBlock HorizontalAlignment="Left" Margin="13,288,0,0" TextWrapping="Wrap" Text="Результаты:" VerticalAlignment="Top" Height="14" Width="83" Foreground="White"/>
-                <ListView x:Name="mailsListView" Margin="10,312,24,331" SelectionMode="Multiple"/>
-                <CheckBox Content="Выбрать все почты в списке" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Foreground="White"/>
+                <ComboBox x:Name="cbShortName" IsEditable="True"  FontSize="15" HorizontalAlignment="Left" Margin="6,203,0,0" VerticalAlignment="Top" Width="194" DisplayMemberPath="ShortName"/>
+                <Button x:Name="btnSearchEmail" Content="Поиск" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Height="28" Width="96" Click="btnSearchEmail_Click" FontSize="14"/>
+                <Button x:Name="btnAddRecipientEmail" Content="Добавить почту получателя" HorizontalAlignment="Left" Margin="16,772,0,0" VerticalAlignment="Top" Width="188" Click="btnAddRecipientEmail_Click" Height="44" FontSize="14"/>
+                <TextBlock HorizontalAlignment="Left" Margin="16,358,0,0" TextWrapping="Wrap" Text="Результаты:" VerticalAlignment="Top" Height="14" Width="84" Foreground="White"/>
+                <ListView x:Name="lvMails" FontSize="15" Margin="14,382,20,261" SelectionMode="Multiple"/>
+                <CheckBox x:Name="ckbSelectAll"   Content="Выбрать все почты в списке" HorizontalAlignment="Left" Margin="14,343,0,0" VerticalAlignment="Top" Foreground="White" Checked="ckbSelectAll_Checked" Unchecked="ckbSelectAll_Unchecked"/>
+                <TextBlock HorizontalAlignment="Left" Margin="7,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Тип организации:" Foreground="White"/>
+                <ComboBox x:Name="cbType" IsEditable="True"  FontSize="15" HorizontalAlignment="Left" Margin="7,253,0,0" VerticalAlignment="Top" Width="194"/>
             </Grid>
         </GroupBox>
 
 
 
-        <Grid Grid.Column="1" Margin="10,34,10,164" Grid.ColumnSpan="2" >
+        <Grid Grid.Column="1" Margin="10,34,10,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="17*"/>
                 <ColumnDefinition Width="120*"/>
@@ -57,42 +64,45 @@
                 <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="239*"/>
-                <RowDefinition Height="75*"/>
-                <RowDefinition Height="159*"/>
-                <RowDefinition Height="237*"/>
-                <RowDefinition Height="184*"/>
-                <RowDefinition Height="96*"/>
+                <RowDefinition Height="251*"/>
+                <RowDefinition Height="127*"/>
+                <RowDefinition Height="190*"/>
+                <RowDefinition Height="147*"/>
+                <RowDefinition Height="77*"/>
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Center" Margin="0,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1">
                 <Run Text="Почта отправителя"/><Run Language="ru-ru" Text=":"/>
             </TextBlock>
-            <ComboBox x:Name="cbEmailSender" SelectionChanged="cbEmailSender_SelectionChanged" IsEditable="True" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Width="420" Height="29" DisplayMemberPath="Email" Grid.Column="3"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1">
+            <ComboBox x:Name="cbEmailSender" SelectionChanged="cbEmailSender_SelectionChanged" IsEditable="True" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Width="420" Height="29"  Grid.Column="3" FontSize="15"/>
+            <TextBlock HorizontalAlignment="Left" Margin="2,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1" Grid.ColumnSpan="2">
                 <Run Language="ru-ru" Text="Почта получателя:"/>
             </TextBlock>
-            <ListBox x:Name="ltbEmailRecipient" Margin="0,73,0,10" Grid.Column="3"/>
-            <Button x:Name="btnRemoveEmailRecipient" Content="Удалить почту" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="120" Click="btnRemoveEmailRecipient_Click" Grid.Column="1" Margin="0,154,0,0"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Height="16" Width="120" Grid.Column="1">
+            <ListBox x:Name="ltbEmailRecipient" Margin="0,100,0,43" Grid.Column="3" FontSize="15"/>
+            <Button x:Name="btnRemoveEmailRecipient" Content="Удалить почту" FontSize="13" HorizontalAlignment="Center" Width="120" Click="btnRemoveEmailRecipient_Click" Grid.Column="1" Margin="0,148,0,73"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="120" Grid.Column="1">
                 <Run Language="ru-ru" Text="Тема письма:"/>
             </TextBlock>
-            <TextBox x:Name="tbSubjectLetter" HorizontalAlignment="Center" Margin="0,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="34" Grid.Row="1" Grid.Column="3"/>
-            <TextBlock HorizontalAlignment="Left" Margin="0,22,0,0" TextWrapping="Wrap" Text="Текст письма:" VerticalAlignment="Top" Grid.Row="3" Height="16" Width="80" Grid.Column="1"/>
-            <RichTextBox x:Name="rtbLetter" Margin="0,22,0,6" Grid.Row="3" Grid.Column="3"/>
-            <Button x:Name="AddingFile" Content="Добавить файл" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="AddingFile_Click" Grid.Row="2" Grid.Column="1"/>
-            <Button x:Name="btnRemoveFile" Content="Удалить файл" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveFile_Click" Height="32" Grid.Row="2" Grid.Column="1"/>
-            <ListBox x:Name="listAttachments" Margin="0,10,0,0" Grid.Row="2" Grid.Column="3"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,21,0,0" TextWrapping="Wrap" Text="Выберите подпись:" VerticalAlignment="Top" Grid.Row="4" Height="16" Width="116" Grid.Column="1"/>
-            <ComboBox x:Name="cbSignature" HorizontalAlignment="Center" IsEditable="True" Margin="0,15,0,0" VerticalAlignment="Top" Width="420" Height="28" Grid.Row="4" Grid.Column="3" SelectionChanged="cbSignature_SelectionChanged"/>
-            <RichTextBox x:Name="rtbSignature" Margin="0,66,0,10" Grid.Row="4" Grid.Column="3">
+            <TextBox x:Name="tbSubjectLetter" HorizontalAlignment="Center" Margin="0,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="34" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="0,22,0,0" TextWrapping="Wrap" Text="Текст письма:" VerticalAlignment="Top" Grid.Row="2" Height="16" Width="80" Grid.Column="1"/>
+            <RichTextBox x:Name="rtbLetter" Margin="0,22,0,6" Grid.Row="2" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15"/>
+            <Button x:Name="AddingFile" Content="Добавить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="AddingFile_Click" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="btnRemoveFile" Content="Удалить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,69,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveFile_Click" Height="32" Grid.Row="1" Grid.Column="1"/>
+            <ListBox x:Name="listAttachments" Margin="0,10,0,0" Grid.Row="1" Grid.Column="3" FontSize="15"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,21,0,0" TextWrapping="Wrap" Text="Выберите подпись:" VerticalAlignment="Top" Grid.Row="3" Height="16" Width="116" Grid.Column="1"/>
+            <ComboBox x:Name="cbSignature" HorizontalAlignment="Center" IsEditable="True" FontSize="15" Margin="0,15,0,0" VerticalAlignment="Top" Width="420" Height="28" Grid.Row="3" Grid.Column="3" SelectionChanged="cbSignature_SelectionChanged"/>
+            <RichTextBox x:Name="rtbSignature" Margin="0,66,0,10" Grid.Row="3" Grid.Column="3" FontSize="15" SpellCheck.IsEnabled="True" Language="ru-ru">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
             </RichTextBox>
-            <Button x:Name="btnDelite" Content="Очистить сообщение" HorizontalAlignment="Left" Margin="0,21,0,0" VerticalAlignment="Top" Width="134" Height="44" Click="btnDelite_Click" RenderTransformOrigin="0.496,2.338" Grid.Row="5" Grid.Column="3"/>
-            <Button x:Name="btnSend" Content="Отправить" HorizontalAlignment="Left" Margin="271,21,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="btnSend_Click" Grid.Row="5" RenderTransformOrigin="0.57,0.602" Grid.Column="3"/>
-            <Button Content="Создать подпись" HorizontalAlignment="Left" Margin="0,68,0,0" Grid.Row="4" VerticalAlignment="Top" Height="60" Width="116" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="btnAddEmailRecipient" Content="Новая почта" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="120" Click="btnRemoveEmailRecipient_Click" Grid.Column="1" Margin="0,98,0,0"/>
+            <Button x:Name="btnDelite" Content="Очистить сообщение" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="168" Height="44" Click="btnDelite_Click" RenderTransformOrigin="0.496,2.338" Grid.Row="4" Grid.Column="3" FontSize="14"/>
+            <Button x:Name="btnSend" Content="Отправить" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="btnSend_Click" Grid.Row="4" RenderTransformOrigin="0.57,0.602" Grid.Column="3" FontSize="14"/>
+            <Button x:Name="btnCreate" Content="Создать подпись" HorizontalAlignment="Left" Margin="0,68,0,0" Grid.Row="3" VerticalAlignment="Top" Height="60" Width="116" Grid.Column="1" Click="btnCreate_Click" FontSize="12"/>
+            <Button x:Name="btnAddEmailRecipient" Content="Новая почта" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="120" Click="btnAddEmailRecipient_Click" Grid.Column="1" Margin="0,113,0,0" FontSize="14"/>
+            <Button x:Name="btnRemoveAllEmailRecipient" Content="Удалить все почты" FontSize="12" HorizontalAlignment="Center" Width="120" Click="btnRemoveAllEmailRecipient_Click" Grid.Column="1" Margin="0,183,0,45"/>
+            <Button x:Name="btnRemoveAllFile" Content="Удалить все файлы" FontSize="12" HorizontalAlignment="Left" Margin="15,106,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveAllFile_Click" Height="21" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1"><Run Text="От кого:"/><Run Language="ru-ru" Text=":"/></TextBlock>
+            <ComboBox x:Name="cbFromWhom" Text="НЦРПО"  IsEditable="True" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="420" Height="29"  Grid.Column="3" FontSize="15"/>
         </Grid>
 
     </Grid>
