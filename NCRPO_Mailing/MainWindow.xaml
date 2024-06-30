@@ -1,0 +1,22 @@
+﻿<Window x:Class="NCRPO_Mailing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NCRPO_Mailing"
+        mc:Ignorable="d"
+        Title="Приложение"  MinHeight="1000" MinWidth="1000"  Background="Gray" Icon="Resources/icon.jpg" Height="1096">
+    <Grid Margin="0,0,0,74">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="349"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#F339">
+            <TextBlock Text="НЦРПО" FontSize="30" Foreground="White" Margin="91,3,764,-3"/>
+            <Button x:Name="btnBack" FontSize="21" HorizontalAlignment="Right"   Content="Назад" Click="btnBack_Click" Margin="842,7,0,13" Width="112" RenderTransformOrigin="0.5,0.601"/>
+            <Image HorizontalAlignment="Left" Height="86" VerticalAlignment="Center" Width="99" Source="Resources/mail.png"/>
+
+        </Grid>
+        <Frame x:Name="FrmMain" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="FrmMain_ContentRendered" Margin="0,0,0,-697"/>
+    </Grid>
+</Window>

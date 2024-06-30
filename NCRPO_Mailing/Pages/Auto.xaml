@@ -1,0 +1,39 @@
+﻿<Page x:Class="NCRPO_Mailing.Pages.Auto"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NCRPO_Mailing.Pages"
+      mc:Ignorable="d"
+      Title="Авторизация" Background="Gray" Height="1100" Width="1000">
+
+    <Grid Height="1100" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="236"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1100" Width="524" Background="#F339">
+            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Авторизация" FontSize="30" Height="48" Width="206" Foreground="White"/>
+            <TextBlock Text="Логин:" FontSize="15" Foreground="White" Width="204"/>
+            <ComboBox x:Name="cbLogin" FontSize="15" Width="208" Height="23"/>
+            <TextBlock Text="Пароль:"  FontSize="15" Foreground="White" Width="203"/>
+            <TextBox x:Name="cbPassword" FontSize="15" Width="208" Height="23" />
+            <TextBox x:Name="tbPassword" Visibility="Hidden"  FontSize="15" Width="208" Height="47"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Height="47" Width="208" >
+                <Button x:Name="btnAuthorization" Content="Войти"  Width="207" Height="40" FontSize="20" Click="btnAuthorization_Click"/>
+
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Page>

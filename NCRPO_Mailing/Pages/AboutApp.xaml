@@ -1,0 +1,46 @@
+﻿<Page x:Class="NCRPO_Mailing.Pages.AboutApp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NCRPO_Mailing.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1000"
+      Title="О приложении"  Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="101*"/>
+            <RowDefinition Height="899*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="912*"/>
+            <ColumnDefinition Width="43*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Инструкция по использованию приложения" FontWeight="Bold" FontSize="30" Margin="0,29,0,7" Grid.Column="1"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Margin="0,1,0,68" Grid.Row="1" >
+            <StackPanel Height="870" CanVerticallyScroll="True">
+                <Expander Header="Отправление сообщений" FontSize="25" FontWeight="Bold">
+                    <TextBlock Text="Сами разберетесь как-нибудь, только не сломайте, пожалуйста" FontSize="20" FontWeight="Normal" Width="837"/>
+                </Expander>
+                <Expander Header="Добавление, удаление, редактирование организаций" FontSize="25" FontWeight="Bold">
+                    <TextBlock Text="В разработке" FontSize="20" FontWeight="Normal" Width="843"/>
+                </Expander>
+                <Expander Header="Добавление, удаление, редактирование информации об отделах" FontSize="25" FontWeight="Bold">
+                    <StackPanel Width="842">
+                        <TextBlock Text="Отметьте, что вам больше нравится" FontSize="20" FontWeight="Normal"/>
+                        <CheckBox Content=" Думать, что когда-нибудь приложение будет полностью готово" FontSize="20" FontWeight="Normal"/>
+                        <CheckBox Content=" Думать, что эти программисты сменят профессию" FontSize="20" FontWeight="Normal"/>
+                        <CheckBox Content=" Торт" FontSize="20" FontWeight="Normal"/>
+                    </StackPanel>
+                </Expander>
+                <Expander Header="Разработчики" FontSize="25" FontWeight="Bold">
+                    <TextBlock Text="Ты да я, да мы с тобой" FontSize="20" FontWeight="Normal" Width="839"/>
+                </Expander>
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+</Page>
