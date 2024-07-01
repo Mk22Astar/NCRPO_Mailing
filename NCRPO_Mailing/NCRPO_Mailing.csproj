@@ -153,10 +153,10 @@
     <Compile Include="AddItem.xaml.cs">
       <DependentUpon>AddItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BDModel\ncrpoContext.cs" />
-    <Compile Include="BDModel\Regions.cs" />
-    <Compile Include="BDModel\Signatures.cs" />
-    <Compile Include="BDModel\Types.cs" />
+    <Compile Include="ncrpoContext.cs" />
+    <Compile Include="Regions.cs" />
+    <Compile Include="Signatures.cs" />
+    <Compile Include="Types.cs" />
     <Page Include="AddItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,11 +169,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BDModel\Departments.cs" />
-    <Compile Include="BDModel\Directors.cs" />
-    <Compile Include="BDModel\Emails.cs" />
-    <Compile Include="BDModel\Employees.cs" />
     <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="Departments.cs" />
+    <Compile Include="Directors.cs" />
+    <Compile Include="Emails.cs" />
+    <Compile Include="Employees.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -212,7 +212,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDModel\Departments.cs" />
+    <Compile Include="BDModel\Directors.cs" />
+    <Compile Include="BDModel\Emails.cs" />
+    <Compile Include="BDModel\Employees.cs" />
+    <Compile Include="BDModel\ncrpoContext.cs" />
     <Compile Include="BDModel\Organizations.cs" />
+    <Compile Include="BDModel\Positions.cs" />
+    <Compile Include="BDModel\Regions.cs" />
+    <Compile Include="BDModel\Signatures.cs" />
+    <Compile Include="BDModel\Types.cs" />
+    <Compile Include="Organizations.cs" />
     <Compile Include="Pages\NewSignature.xaml.cs">
       <DependentUpon>NewSignature.xaml</DependentUpon>
     </Compile>
@@ -237,7 +247,7 @@
     <Compile Include="Pages\SendingMessages.xaml.cs">
       <DependentUpon>SendingMessages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BDModel\Positions.cs" />
+    <Compile Include="Positions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

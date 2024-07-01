@@ -1,14 +1,17 @@
 ﻿using Microsoft.Win32;
+using NCRPO_Mailing.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Navigation;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NCRPO_Mailing.Pages
 {
@@ -56,6 +59,10 @@ namespace NCRPO_Mailing.Pages
 
                 var departments = context.Departments.ToList();
                 cbFromWhom.ItemsSource = departments;
+
+                var signature = context.Signatures.Where(s => s.DepartmentId == departmentId).Select(s => s.Name).ToList();
+                cbSignature.ItemsSource = signature;
+                
             }
         }
 
@@ -86,33 +93,30 @@ namespace NCRPO_Mailing.Pages
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
         private void btnSearchEmail_Click(object sender, RoutedEventArgs e)
         {
             string selectedINN = cbINN.Text.ToLower();
-            string selectedEmail = cbEmailSender.Text.ToLower();
+            string selectedEmail = cbEmail.Text.ToLower();
             int selectedRegionId = GetSelectedRegionId();
             string selectedName = cbName.Text.ToLower();
             string selectedShortName = cbShortName.Text.ToLower();
             int selectedType = GetSelectedTypeId();
-
             using (var context = new ncrpoContext())
             {
-                // Фильтрация с использованием join
-                var filteredEmails = context.Organizations
-                    .Where(record =>
+                // Фильтрация 
+                var filteredEmails = context.Organizations.Where(record =>
                         (string.IsNullOrEmpty(selectedINN) || record.Inn.ToLower().Contains(selectedINN)) &&
                         (string.IsNullOrEmpty(selectedEmail) || record.Email.ToLower().Contains(selectedEmail)) &&
-                        (selectedRegionId == 0 || record.RegionId == selectedRegionId) && 
+                        (selectedRegionId == 0 || record.RegionId == selectedRegionId) &&
                         (string.IsNullOrEmpty(selectedName) || record.Name.ToLower().Contains(selectedName)) &&
                         (string.IsNullOrEmpty(selectedShortName) || record.ShortName.ToLower().Contains(selectedShortName)) &&
                         (selectedType == 0 || record.TypeId == selectedType)
-                    )
-                    .Select(record => record.Email).ToList();
-
+                    ).Select(record => record.Email).ToList();
                 // Обновление ListView
                 lvMails.ItemsSource = filteredEmails;
             }
@@ -250,9 +254,20 @@ namespace NCRPO_Mailing.Pages
 
         private void cbSignature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            using (var context = new ncrpoContext())
+            {
+                if (cbSignature.SelectedItem != null)
+                {
+                    string sTitle = cbSignature.SelectedItem.ToString();
+                    var signaturText = context.Signatures.Where(s => s.Name == sTitle).Select(s => s.Text).FirstOrDefault();
 
+                    rtbSignature.Document.Blocks.Clear();
+                    rtbSignature.Document.Blocks.Add(new Paragraph(new Run(signaturText)));
+
+                }
+                
+            }
         }
-
         private void btnDelite_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Хотите отчистить поля для письма?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -263,6 +278,8 @@ namespace NCRPO_Mailing.Pages
                 tbSubjectLetter.Text = string.Empty;
                 rtbLetter.Document.Blocks.Clear();
                 listAttachments.Items.Clear();
+                cbSignature.Text = string.Empty;
+                rtbSignature.Document.Blocks.Clear();
 
             }
         }
@@ -276,7 +293,8 @@ namespace NCRPO_Mailing.Pages
             }
             _subjectLetter = tbSubjectLetter.Text;
             _document = rtbLetter.Document;
-            _letter = new TextRange(_document.ContentStart, _document.ContentEnd).Text;
+            TextRange signatureText = new TextRange(rtbSignature.Document.ContentStart,rtbSignature.Document.ContentEnd);
+            _letter = new TextRange(_document.ContentStart, _document.ContentEnd).Text + "\r\n" + signatureText.Text;
             string wromWhom = cbFromWhom.Text;
 
 

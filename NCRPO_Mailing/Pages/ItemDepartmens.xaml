@@ -14,28 +14,26 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="452"/>
+            <RowDefinition Height="352"/>
+            <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
 
-        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="10,10,10,0" Height="314">
-            <TextBlock Text="Фамилия:" FontWeight="Bold" FontSize="20"/>
-            <TextBlock x:Name="tbSurname" Margin="0,0,0,10" FontSize="20"/>
-            <TextBlock Text="Имя:" FontWeight="Bold" FontSize="20"/>
-            <TextBlock x:Name="tbName" Margin="0,0,0,10" FontSize="20"/>
-            <TextBlock Text="Отчество:" FontWeight="Bold" FontSize="20"/>
-            <TextBlock x:Name="tbPatronymic" Margin="0,0,0,10" FontSize="20"/>
-            <TextBlock Text="Email:" FontWeight="Bold" FontSize="20"/>
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0" Height="432" Grid.RowSpan="2">
+            <TextBlock Text="Название отдела:" FontWeight="Bold" FontSize="20"/>
+            <TextBlock x:Name="tbDeport" Margin="0,0,0,10" FontSize="20"/>
+            <TextBlock Text="Почты:" FontWeight="Bold" FontSize="20"/>
             <TextBlock x:Name="tbEmail" Margin="0,0,0,10" FontSize="20"/>
-            <TextBlock Text="Логин:" FontWeight="Bold" FontSize="20"/>
-            <TextBlock x:Name="tbLogin" Margin="0,0,0,10" FontSize="20"/>
-            <TextBlock Text="Роль:" FontWeight="Bold" FontSize="20"/>
-            <TextBlock x:Name="tbRole" Margin="0,0,0,10" FontSize="20"/>
+            <TextBlock Text="Подписи:" FontWeight="Bold" FontSize="20"/>
+            <TextBlock x:Name="tbSignatur" Margin="0,0,0,10" FontSize="20"/>
+            <TextBlock Text="Пароль:" FontWeight="Bold" FontSize="20"/>
+            <TextBlock x:Name="tbPassword" Margin="0,0,0,10" FontSize="20"/>
+
         </StackPanel>
 
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,10,0,360" Width="478" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,10,0,360" Width="478" Grid.Row="2">
             <Button x:Name="btnEdit" Content="Редактировать" Width="170" Margin="30" Click="btnEdit_Click" Height="46" FontSize="20"/>
             <Button x:Name="btnDelete" Content="Удалить" Width="188"  Margin="30" Click="btnDelete_Click" Height="50" FontSize="20"/>
         </StackPanel>

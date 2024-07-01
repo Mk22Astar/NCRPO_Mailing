@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using NCRPO_Mailing.Models;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -17,6 +18,7 @@ namespace NCRPO_Mailing.Pages
             {
                 var departments = context.Departments.ToList();
                 cbLogin.ItemsSource = departments;
+                context.SaveChanges();
             }
 
         }
@@ -26,7 +28,7 @@ namespace NCRPO_Mailing.Pages
             var departmentName = cbLogin.Text;
             var password = tbPassword.Text;
             var departmentId = GetDepartment(departmentName, password);
-            if (departmentId is null)
+            if (departmentId == 0)
             {
                 MessageBox.Show("ID отдела не найден. Пожалуйста, проверьте выбранное название отдела.");
             }
@@ -36,11 +38,11 @@ namespace NCRPO_Mailing.Pages
             }            
         }
 
-        public int? GetDepartment(string departmentName, string password)
+        public int GetDepartment(string departmentName, string password)
         {
             using (var context = new ncrpoContext())
             {
-                return  context.Departments.FirstOrDefault(d => d.Name == departmentName && d.Password == password)?.DepartmentId;
+                return  context.Departments.FirstOrDefault(d => d.Name == departmentName && d.Password == password).DepartmentId;
             }
         }
 

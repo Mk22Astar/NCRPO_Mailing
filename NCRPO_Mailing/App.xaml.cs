@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NCRPO_Mailing.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -27,7 +28,7 @@ namespace NCRPO_Mailing
                 initializer.Initialize();
             }
 
-            
+
         }
     }
 }

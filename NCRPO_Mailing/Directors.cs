@@ -5,17 +5,19 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace NCRPO_Mailing.Models
+namespace NCRPO_Mailing
 {
-    public partial class Regions
+    public partial class Directors
     {
-        public Regions()
+        public Directors()
         {
             Organizations = new HashSet<Organizations>();
         }
 
-        public int RegionId { get; set; }
+        public int DirectorId { get; set; }
         public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public string Surname { get; set; }
 
         public virtual ICollection<Organizations> Organizations { get; set; }
     }
