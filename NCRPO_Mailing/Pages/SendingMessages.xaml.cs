@@ -1,21 +1,17 @@
 ﻿using Microsoft.Win32;
+using NCRPO_Mailing.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NCRPO_Mailing.Pages
 {
@@ -26,14 +22,14 @@ namespace NCRPO_Mailing.Pages
     {
         private List<Attachment> _attachments = new List<Attachment>(); //для прикрепления файлов
         private ObservableCollection<string> _mails = new ObservableCollection<string>();
-        List<string> emailRecipient = new List<string>();
+        private List<string> _emailRecipient = new List<string>();
 
         // хост и порт можно узнать в интернете 
-        string smtpHost, login, password;
-        int smtpPort = 25;
-        SmtpClient client;
-        string emailSender, subjectLetter, letter;
-        FlowDocument document;
+        private string _smtpHost, _login, _password;
+        private int _smtpPort = 25;
+        private SmtpClient _client;
+        private string _emailSender, _subjectLetter, _letter;
+        private FlowDocument _document;
 
 
         public SendingMessages(int departmentId)
@@ -43,14 +39,13 @@ namespace NCRPO_Mailing.Pages
             {
                 var emails = context.Emails.Where(em => em.DepartmentId == departmentId).Select(em => em.Email).ToList();
                 cbEmailSender.ItemsSource = emails;
-                var inn = context.Organizations.ToList();
-                cbINN.ItemsSource = inn;
-                var emailRec = context.Organizations.ToList();
-                cbEmail.ItemsSource = emailRec;
-                var name = context.Organizations.ToList();
-                cbName.ItemsSource = name;
-                var shortName = context.Organizations.ToList();
-                cbShortName.ItemsSource = shortName;
+                var orgs = context.Organizations.ToList();
+
+                cbINN.ItemsSource = orgs;
+                cbEmail.ItemsSource = orgs;
+                cbName.ItemsSource = orgs;    
+                cbShortName.ItemsSource = orgs;
+
                 var regions = context.Regions.Select(r => new { r.RegionId, r.Name }).ToList();
 
                 cbRegion.DisplayMemberPath = "Name";
@@ -65,10 +60,10 @@ namespace NCRPO_Mailing.Pages
                 var departments = context.Departments.ToList();
                 cbFromWhom.ItemsSource = departments;
 
-
+                var signature = context.Signatures.Where(s => s.DepartmentId == departmentId).Select(s => s.Name).ToList();
+                cbSignature.ItemsSource = signature;
+                
             }
-
-           
         }
 
 
@@ -98,37 +93,33 @@ namespace NCRPO_Mailing.Pages
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
         private void btnSearchEmail_Click(object sender, RoutedEventArgs e)
         {
             string selectedINN = cbINN.Text.ToLower();
-            string selectedEmail = cbEmailSender.Text.ToLower();
+            string selectedEmail = cbEmail.Text.ToLower();
             int selectedRegionId = GetSelectedRegionId();
             string selectedName = cbName.Text.ToLower();
             string selectedShortName = cbShortName.Text.ToLower();
             int selectedType = GetSelectedTypeId();
-
             using (var context = new ncrpoContext())
             {
-                // Фильтрация с использованием join
-                var filteredEmails = context.Organizations
-                    .Where(record =>
+                // Фильтрация 
+                var filteredEmails = context.Organizations.Where(record =>
                         (string.IsNullOrEmpty(selectedINN) || record.Inn.ToLower().Contains(selectedINN)) &&
                         (string.IsNullOrEmpty(selectedEmail) || record.Email.ToLower().Contains(selectedEmail)) &&
-                        (selectedRegionId == 0 || record.RegionId == selectedRegionId) && 
+                        (selectedRegionId == 0 || record.RegionId == selectedRegionId) &&
                         (string.IsNullOrEmpty(selectedName) || record.Name.ToLower().Contains(selectedName)) &&
                         (string.IsNullOrEmpty(selectedShortName) || record.ShortName.ToLower().Contains(selectedShortName)) &&
                         (selectedType == 0 || record.TypeId == selectedType)
-                    )
-                    .Select(record => record.Email).ToList();
-
+                    ).Select(record => record.Email).ToList();
                 // Обновление ListView
                 lvMails.ItemsSource = filteredEmails;
             }
-
         }
 
         private int GetSelectedRegionId()
@@ -263,9 +254,20 @@ namespace NCRPO_Mailing.Pages
 
         private void cbSignature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            using (var context = new ncrpoContext())
+            {
+                if (cbSignature.SelectedItem != null)
+                {
+                    string sTitle = cbSignature.SelectedItem.ToString();
+                    var signaturText = context.Signatures.Where(s => s.Name == sTitle).Select(s => s.Text).FirstOrDefault();
 
+                    rtbSignature.Document.Blocks.Clear();
+                    rtbSignature.Document.Blocks.Add(new Paragraph(new Run(signaturText)));
+
+                }
+                
+            }
         }
-
         private void btnDelite_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Хотите отчистить поля для письма?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -276,41 +278,44 @@ namespace NCRPO_Mailing.Pages
                 tbSubjectLetter.Text = string.Empty;
                 rtbLetter.Document.Blocks.Clear();
                 listAttachments.Items.Clear();
+                cbSignature.Text = string.Empty;
+                rtbSignature.Document.Blocks.Clear();
 
             }
         }
 
         private async void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            emailSender = cbEmailSender.Text;
+            _emailSender = cbEmailSender.Text;
             foreach (string i in ltbEmailRecipient.Items)
             {
-                emailRecipient.Add(i);
+                _emailRecipient.Add(i);
             }
-            subjectLetter = tbSubjectLetter.Text;
-            document = rtbLetter.Document;
-            letter = new TextRange(document.ContentStart, document.ContentEnd).Text;
+            _subjectLetter = tbSubjectLetter.Text;
+            _document = rtbLetter.Document;
+            TextRange signatureText = new TextRange(rtbSignature.Document.ContentStart,rtbSignature.Document.ContentEnd);
+            _letter = new TextRange(_document.ContentStart, _document.ContentEnd).Text + "\r\n" + signatureText.Text;
             string wromWhom = cbFromWhom.Text;
 
 
             try
             {
-                if (emailSender != null)
+                if (_emailSender != null)
                 {
 
                     using (var context = new ncrpoContext())
                     {
-                        login = emailSender;
-                        password = context.Emails.Where(em => em.Email == login).Select(em => em.Password).FirstOrDefault();
+                        _login = _emailSender;
+                        _password = context.Emails.Where(em => em.Email == _login).Select(em => em.Password).FirstOrDefault();
 
                     }
-                    if (emailSender.EndsWith("yandex.ru"))
+                    if (_emailSender.EndsWith("yandex.ru"))
                     {
-                        smtpHost = "smtp.yandex.ru";
+                        _smtpHost = "smtp.yandex.ru";
                     }
-                    else if (emailSender.EndsWith("mail.ru"))
+                    else if (_emailSender.EndsWith("mail.ru"))
                     {
-                        smtpHost = "smtp.mail.ru";
+                        _smtpHost = "smtp.mail.ru";
                     }
                     else
                     {
@@ -319,16 +324,16 @@ namespace NCRPO_Mailing.Pages
                     }
                 }
 
-                client = new SmtpClient(smtpHost, smtpPort);
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(login, password);
+                _client = new SmtpClient(_smtpHost, _smtpPort);
+                _client.EnableSsl = true;
+                _client.UseDefaultCredentials = false;
+                _client.Credentials = new NetworkCredential(_login, _password);
                 
                 MailMessage message = new MailMessage
                 {
-                    From = new MailAddress(emailSender, wromWhom),
-                    Subject = subjectLetter,
-                    Body = letter
+                    From = new MailAddress(_emailSender, wromWhom),
+                    Subject = _subjectLetter,
+                    Body = _letter
 
                 };
 
@@ -337,17 +342,17 @@ namespace NCRPO_Mailing.Pages
                     message.Attachments.Add(attachment);
                 }
 
-                foreach (string el in emailRecipient)
+                foreach (string el in _emailRecipient)
                 {
                     message.To.Add(el);
-                    await client.SendMailAsync(message);
+                    await _client.SendMailAsync(message);
                     message.To.Clear();
                 }
 
                 MessageBox.Show("Сообщение отправлено!");
-                emailRecipient.Clear();
-                letter = string.Empty;
-                subjectLetter = string.Empty;
+                _emailRecipient.Clear();
+                _letter = string.Empty;
+                _subjectLetter = string.Empty;
             }
             catch (Exception ex)
             {

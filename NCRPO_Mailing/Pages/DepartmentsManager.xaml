@@ -13,27 +13,44 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="118*"/>
         </Grid.RowDefinitions>
-        <ListView Name="lvDepartments" Grid.Column="0" Margin="0,40,0,0" d:ItemsSource="{d:SampleData ItemCount=6}" SelectionChanged="lvDepartments_SelectionChanged" Grid.Row="1">
+        <ListView Name="lvDepartments" Grid.Row="1" SelectionChanged="lvDepartments_SelectionChanged" Margin="0,30,0,0">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Height="900" />
+                    <UniformGrid Columns="3" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5"/>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Background}" Height="146" >
+                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Background}" Width="300" Height="200" Margin="5">
                         <Grid>
-                            <StackPanel x:Name="PanelEmp" Grid.Column="1">
-                                <TextBlock Text="{Binding ImiPersonal}" FontWeight="Bold" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding FamiliaPersonala}" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding OthestvoPersonala}" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding Doljnosti.NameDolj}" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding NomerTelefona}" TextAlignment="Center"/>
+                            <StackPanel x:Name="PanelEmp" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center"/>
+
+                                <TextBlock Text="Emails:" FontWeight="Bold" TextAlignment="Center"/>
+                                <ItemsControl ItemsSource="{Binding Emails}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Email}" TextAlignment="Center"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock Text="Signatures:" FontWeight="Bold" TextAlignment="Center"/>
+                                <ItemsControl ItemsSource="{Binding Signatures}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" TextAlignment="Center"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock Text="{Binding Password}" TextAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </Border>

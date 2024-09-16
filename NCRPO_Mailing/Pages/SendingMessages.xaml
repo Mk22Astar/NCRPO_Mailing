@@ -64,7 +64,10 @@
                 <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="251*"/>
+                <RowDefinition Height="47*"/>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="119*"/>
+                <RowDefinition Height="45*"/>
                 <RowDefinition Height="127*"/>
                 <RowDefinition Height="190*"/>
                 <RowDefinition Height="147*"/>
@@ -74,35 +77,35 @@
                 <Run Text="Почта отправителя"/><Run Language="ru-ru" Text=":"/>
             </TextBlock>
             <ComboBox x:Name="cbEmailSender" SelectionChanged="cbEmailSender_SelectionChanged" IsEditable="True" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Width="420" Height="29"  Grid.Column="3" FontSize="15"/>
-            <TextBlock HorizontalAlignment="Left" Margin="2,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBlock HorizontalAlignment="Left" Margin="2,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2">
                 <Run Language="ru-ru" Text="Почта получателя:"/>
             </TextBlock>
-            <ListBox x:Name="ltbEmailRecipient" Margin="0,100,0,43" Grid.Column="3" FontSize="15"/>
-            <Button x:Name="btnRemoveEmailRecipient" Content="Удалить почту" FontSize="13" HorizontalAlignment="Center" Width="120" Click="btnRemoveEmailRecipient_Click" Grid.Column="1" Margin="0,148,0,73"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="120" Grid.Column="1">
+            <ListBox x:Name="ltbEmailRecipient" Margin="0,12,0,45" Grid.Column="3" FontSize="15" Grid.RowSpan="2" Grid.Row="2"/>
+            <Button x:Name="btnRemoveEmailRecipient" Content="Удалить почту" FontSize="13" HorizontalAlignment="Center" Width="120" Click="btnRemoveEmailRecipient_Click" Grid.Column="1" Margin="0,60,0,28" Grid.Row="2"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="120" Grid.Column="1" Grid.Row="3">
                 <Run Language="ru-ru" Text="Тема письма:"/>
             </TextBlock>
-            <TextBox x:Name="tbSubjectLetter" HorizontalAlignment="Center" Margin="0,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="34" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15" Grid.RowSpan="2"/>
-            <TextBlock HorizontalAlignment="Left" Margin="0,22,0,0" TextWrapping="Wrap" Text="Текст письма:" VerticalAlignment="Top" Grid.Row="2" Height="16" Width="80" Grid.Column="1"/>
-            <RichTextBox x:Name="rtbLetter" Margin="0,22,0,6" Grid.Row="2" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15"/>
-            <Button x:Name="AddingFile" Content="Добавить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="AddingFile_Click" Grid.Row="1" Grid.Column="1"/>
-            <Button x:Name="btnRemoveFile" Content="Удалить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,69,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveFile_Click" Height="32" Grid.Row="1" Grid.Column="1"/>
-            <ListBox x:Name="listAttachments" Margin="0,10,0,0" Grid.Row="1" Grid.Column="3" FontSize="15"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,21,0,0" TextWrapping="Wrap" Text="Выберите подпись:" VerticalAlignment="Top" Grid.Row="3" Height="16" Width="116" Grid.Column="1"/>
-            <ComboBox x:Name="cbSignature" HorizontalAlignment="Center" IsEditable="True" FontSize="15" Margin="0,15,0,0" VerticalAlignment="Top" Width="420" Height="28" Grid.Row="3" Grid.Column="3" SelectionChanged="cbSignature_SelectionChanged"/>
-            <RichTextBox x:Name="rtbSignature" Margin="0,66,0,10" Grid.Row="3" Grid.Column="3" FontSize="15" SpellCheck.IsEnabled="True" Language="ru-ru">
+            <TextBox x:Name="tbSubjectLetter" HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" Height="31" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15" Grid.RowSpan="2" Grid.Row="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="0,22,0,0" TextWrapping="Wrap" Text="Текст письма:" VerticalAlignment="Top" Grid.Row="5" Height="16" Width="80" Grid.Column="1"/>
+            <RichTextBox x:Name="rtbLetter" Margin="0,22,0,6" Grid.Row="5" Grid.Column="3" SpellCheck.IsEnabled="True" Language="ru-ru" FontSize="15"/>
+            <Button x:Name="AddingFile" Content="Добавить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" Height="32" Width="120" Click="AddingFile_Click" Grid.Row="4" Grid.Column="1"/>
+            <Button x:Name="btnRemoveFile" Content="Удалить файл" FontSize="14" HorizontalAlignment="Center" Margin="0,69,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveFile_Click" Height="32" Grid.Row="4" Grid.Column="1"/>
+            <ListBox x:Name="listAttachments" Margin="0,10,0,189" Grid.Row="4" Grid.Column="3" FontSize="15" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,21,0,0" TextWrapping="Wrap" Text="Выберите подпись:" VerticalAlignment="Top" Grid.Row="6" Height="16" Width="116" Grid.Column="1"/>
+            <ComboBox x:Name="cbSignature" HorizontalAlignment="Center" IsEditable="True" FontSize="15" Margin="0,15,0,0" VerticalAlignment="Top" Width="420" Height="28" Grid.Row="6" Grid.Column="3" SelectionChanged="cbSignature_SelectionChanged"/>
+            <RichTextBox x:Name="rtbSignature" Margin="0,66,0,10" Grid.Row="6" Grid.Column="3" FontSize="15" SpellCheck.IsEnabled="True" Language="ru-ru">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
             </RichTextBox>
-            <Button x:Name="btnDelite" Content="Очистить сообщение" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="168" Height="44" Click="btnDelite_Click" RenderTransformOrigin="0.496,2.338" Grid.Row="4" Grid.Column="3" FontSize="14"/>
-            <Button x:Name="btnSend" Content="Отправить" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="btnSend_Click" Grid.Row="4" RenderTransformOrigin="0.57,0.602" Grid.Column="3" FontSize="14"/>
-            <Button x:Name="btnCreate" Content="Создать подпись" HorizontalAlignment="Left" Margin="0,68,0,0" Grid.Row="3" VerticalAlignment="Top" Height="60" Width="116" Grid.Column="1" Click="btnCreate_Click" FontSize="12"/>
-            <Button x:Name="btnAddEmailRecipient" Content="Новая почта" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="120" Click="btnAddEmailRecipient_Click" Grid.Column="1" Margin="0,113,0,0" FontSize="14"/>
-            <Button x:Name="btnRemoveAllEmailRecipient" Content="Удалить все почты" FontSize="12" HorizontalAlignment="Center" Width="120" Click="btnRemoveAllEmailRecipient_Click" Grid.Column="1" Margin="0,183,0,45"/>
-            <Button x:Name="btnRemoveAllFile" Content="Удалить все файлы" FontSize="12" HorizontalAlignment="Left" Margin="15,106,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveAllFile_Click" Height="21" Grid.Row="1" Grid.ColumnSpan="2"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1"><Run Text="От кого:"/><Run Language="ru-ru" Text=":"/></TextBlock>
-            <ComboBox x:Name="cbFromWhom" Text="НЦРПО"  IsEditable="True" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="420" Height="29"  Grid.Column="3" FontSize="15"/>
+            <Button x:Name="btnDelite" Content="Очистить сообщение" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="168" Height="44" Click="btnDelite_Click" RenderTransformOrigin="0.496,2.338" Grid.Row="7" Grid.Column="3" FontSize="14"/>
+            <Button x:Name="btnSend" Content="Отправить" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="btnSend_Click" Grid.Row="7" RenderTransformOrigin="0.57,0.602" Grid.Column="3" FontSize="14"/>
+            <Button x:Name="btnCreate" Content="Создать подпись" HorizontalAlignment="Left" Margin="0,68,0,0" Grid.Row="6" VerticalAlignment="Top" Height="60" Width="116" Grid.Column="1" Click="btnCreate_Click" FontSize="12"/>
+            <Button x:Name="btnAddEmailRecipient" Content="Новая почта" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="120" Click="btnAddEmailRecipient_Click" Grid.Column="1" Margin="0,26,0,0" FontSize="14" Grid.Row="2"/>
+            <Button x:Name="btnRemoveAllEmailRecipient" Content="Удалить все почты" FontSize="12" HorizontalAlignment="Center" Width="120" Click="btnRemoveAllEmailRecipient_Click" Grid.Column="1" Margin="0,96,0,45" Grid.Row="2" Grid.RowSpan="2"/>
+            <Button x:Name="btnRemoveAllFile" Content="Удалить все файлы" FontSize="12" HorizontalAlignment="Left" Margin="15,106,0,0" VerticalAlignment="Top" Width="120" Click="btnRemoveAllFile_Click" Height="21" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1" Grid.Row="1"><Run Text="От кого:"/><Run Language="ru-ru" Text=":"/></TextBlock>
+            <ComboBox x:Name="cbFromWhom" Text="НЦРПО"  IsEditable="True" HorizontalAlignment="Center" Margin="0,11,0,0" VerticalAlignment="Top" Width="420" Height="29"  Grid.Column="3" FontSize="15" DisplayMemberPath="Name" Grid.Row="1"/>
         </Grid>
 
     </Grid>

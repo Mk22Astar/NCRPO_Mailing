@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace NCRPO_Mailing.Models
+namespace NCRPO_Mailing
 {
     public partial class ncrpoContext : DbContext
     {
@@ -257,7 +257,7 @@ namespace NCRPO_Mailing.Models
 
                 entity.Property(e => e.Text)
                     .HasColumnName("text")
-                    .HasMaxLength(100);
+                    .HasMaxLength(300);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.Signatures)

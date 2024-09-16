@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NCRPO_Mailing.Pages
 {
@@ -20,24 +13,57 @@ namespace NCRPO_Mailing.Pages
     /// </summary>
     public partial class DepartmentsManager : Page
     {
+        private ncrpoContext _context;
         public DepartmentsManager()
         {
             InitializeComponent();
+            _context= new ncrpoContext();
+            LoadData();
+        }
+        private void LoadData()
+        {
+            var departments = _context.Departments.Include(d => d.Emails).Include(d => d.Signatures).ToList();
+            lvDepartments.ItemsSource = departments;
+            
+
         }
 
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
 
+            string filterText = tbFilter.Text.Trim().ToLower();
+
+            if (!string.IsNullOrEmpty(filterText))
+            {
+                var filteredDepartments = _context.Departments
+                    .Include(d => d.Emails)
+                    .Include(d => d.Signatures)
+                    .Where(d => d.Name.ToLower().Contains(filterText))
+                    .ToList();
+
+                lvDepartments.ItemsSource = filteredDepartments;
+
+            }
+            else
+            {
+                LoadData();
+            }
+
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ItemDepartmens());
+            /*NavigationService.Navigate(new ItemDepartmens());*/
         }
 
         private void lvDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NavigationService.Navigate(new ItemDepartmens());
+
+            if (lvDepartments.SelectedItem != null)
+            {
+                var selectedDepartment = lvDepartments.SelectedItem as Departments;
+                NavigationService.Navigate(new ItemDepartmens(selectedDepartment));
+            }
         }
     }
 }

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using NCRPO_Mailing.Models;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NCRPO_Mailing.Pages
 {
@@ -20,11 +11,35 @@ namespace NCRPO_Mailing.Pages
     /// </summary>
     public partial class ItemDepartmens : Page
     {
-        public ItemDepartmens()
+        private readonly Departments _departments;
+        private ncrpoContext _context;
+        public ItemDepartmens(Departments departments)
         {
             InitializeComponent();
+            _departments = departments;
+            _context = new ncrpoContext();
+            LoadUserData();
         }
+        
+        private void LoadUserData()
+        {
+            
+            tbDeport.Text = _departments.Name;
+            var email = _context.Emails.Where(em => em.DepartmentId == _departments.DepartmentId).Select(em => em.Email).ToList();
+            
+            foreach (string em in email)
+            {
+                tbEmail.Text+= em +"\n";
+            }
+            var signatur = _context.Signatures.Where(s => s.DepartmentId == _departments.DepartmentId).Select(s => s.Name).ToList();
+            foreach (string s in signatur)
+            {
+                tbSignatur.Text += s + "\n";
+            }
+            tbPassword.Text = _departments.Password;
 
+            
+        }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
 
